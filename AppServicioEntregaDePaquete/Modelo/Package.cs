@@ -12,8 +12,9 @@ namespace AppServicioEntregaDePaquete.Modelo
         private string direccion;
         private string ciudad;
         private string estado;
-        private string pesoPaquete;
-        private string costoPaquete;
+        private double pesoPaquete;
+        private double costoPaquete;
+        private double calculateCost;
 
         public string Codigo
         {
@@ -45,16 +46,22 @@ namespace AppServicioEntregaDePaquete.Modelo
             set { estado = value; }
         }
 
-        public string PesoPaquete
+        public double PesoPaquete
         {
             get { return pesoPaquete; }
             set { pesoPaquete = value; }
         }
 
-        public string CostoPaquete
+        public double CostoPaquete
         {
             get { return costoPaquete; }
             set { costoPaquete = value; }
+        }
+
+        public double CalculateCost
+        {
+            get { return calculateCost; }
+            set { calculateCost = value; }
         }
 
         public Package() 
@@ -64,11 +71,12 @@ namespace AppServicioEntregaDePaquete.Modelo
             this.direccion = "DDDDDD";
             this.ciudad = "City";
             this.estado = "N.N";
-            this.pesoPaquete = "50 Kg";
-            this.costoPaquete = "50.000";
+            this.pesoPaquete = 50;
+            this.costoPaquete = 50.000;
+            this.calculateCost = this.pesoPaquete * this.costoPaquete;
         }
 
-        public Package(string codigo, string nombre, string direccion, string ciudad, string estado, string pesoPaquete) 
+        public Package(string codigo, string nombre, string direccion, string ciudad, string estado, double pesoPaquete, double costoPaquete, double calculeCost) 
         {
             this.codigo = codigo;
             this.nombre = nombre;
@@ -76,6 +84,8 @@ namespace AppServicioEntregaDePaquete.Modelo
             this.ciudad = ciudad;
             this.estado = estado;
             this.pesoPaquete = pesoPaquete;
+            this.costoPaquete = costoPaquete;
+            this.calculateCost = calculateCost;
         }
 
         public override string ToString()
@@ -87,7 +97,8 @@ namespace AppServicioEntregaDePaquete.Modelo
             "Ciudad: " + this.ciudad + "\n" +
             "Estado: " + this.estado + "\n" +
             "Peso Del Paquete en Kg: " + this.pesoPaquete + "\n" +
-            "Costo Del Paquete: " + this.costoPaquete;
+            "Costo Del Paquete: " + this.costoPaquete + "\n" +
+            "Cuota Total del Envio: " + this.calculateCost;
         }
 
         public override int GetHashCode()
@@ -101,9 +112,13 @@ namespace AppServicioEntregaDePaquete.Modelo
             bool result = false;
 
             if ((this.codigo == o.codigo) &&
-                (this.nombre == o.nombre) && (this.direccion == o.direccion) &&
-                (this.ciudad == o.ciudad) && (this.estado == o.estado) &&
-                (this.pesoPaquete == o.pesoPaquete) && (this.costoPaquete == o.costoPaquete))
+                (this.nombre == o.nombre) && 
+                (this.direccion == o.direccion) &&
+                (this.ciudad == o.ciudad) && 
+                (this.estado == o.estado) &&
+                (this.pesoPaquete == o.pesoPaquete) && 
+                (this.costoPaquete == o.costoPaquete) &&
+                (this.calculateCost == o.calculateCost))
                 result = true;
 
             return result;
