@@ -25,13 +25,13 @@ namespace AppServicioEntregaDePaquete.Modelo
         public TwoDayPackage() 
         {
             this.cuotaServicioEntregaDosDias = 100000;
-            this.CalculateCost2 = this.CalculateCost + this.cuotaServicioEntregaDosDias;
+            this.calculateCost2 = this.CalculateCost + this.cuotaServicioEntregaDosDias;
         }
 
-        public TwoDayPackage(double coutaServicioEntregaDosDias) 
+        public TwoDayPackage(double coutaServicioEntregaDosDias, double calculateCost2) 
         {
             this.cuotaServicioEntregaDosDias = cuotaServicioEntregaDosDias;
-            this.CalculateCost2 = CalculateCost2;
+            this.calculateCost2 = calculateCost2;
         }
 
         public override string ToString()
@@ -41,6 +41,22 @@ namespace AppServicioEntregaDePaquete.Modelo
             "Cuota Total del Envio con el servicio de entre de 2 dias: " + this.CalculateCost2;
         }
 
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            TwoDayPackage o = (TwoDayPackage)obj;
+            bool result = false;
+
+            if ((this.cuotaServicioEntregaDosDias == o.cuotaServicioEntregaDosDias) &&
+                (this.calculateCost2 == o.calculateCost2))
+                result = true;
+
+            return result;
+        }
 
     }
 }
